@@ -12,7 +12,7 @@ class IconAppBarPokebola extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8),
       child: Icon(
         Icons.catching_pokemon,
-        color: AppColorStytle.primaryRed,
+        color: AppColorStytle.typeColors["fire"],
         size: 38,
       ),
     );

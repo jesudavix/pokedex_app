@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/blocs/bloc/search_bloc.dart';
+import 'package:pokedex/blocs/bloc_search_pokemon/search_bloc.dart';
 
 class ButtonBuscarPokemon extends StatelessWidget {
   final SearchState state;

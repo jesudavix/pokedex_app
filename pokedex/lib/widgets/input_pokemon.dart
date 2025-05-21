@@ -16,6 +16,9 @@ class InputBuscarPokemon extends StatelessWidget {
           border: InputBorder.none,
         ),
         cursorColor: Colors.white,
+        onChanged: (value) {
+          
+        },
       ),
     );
   }
