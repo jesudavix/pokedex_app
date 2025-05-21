@@ -8,3 +8,4 @@ sealed class SearchEvent extends Equatable {
 }
 
 class MostrarBarraBuscador extends SearchEvent {}
+class OcultarBarraBuscador extends SearchEvent {}

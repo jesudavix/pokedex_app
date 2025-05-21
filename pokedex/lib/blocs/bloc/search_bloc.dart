@@ -7,11 +7,12 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   SearchBloc() : super(BarraBuscadorOculta()) {
     on<MostrarBarraBuscador>((event, emit) {
-      if(state is BarraBuscadorOculta){
-        emit(BarraBuscadorVisible());
-      } else{
-        emit(BarraBuscadorOculta());
-      }
+      emit(BarraBuscadorVisible());
+    });
+
+    on<OcultarBarraBuscador>((event, emit) {
+      emit(BarraBuscadorOculta());
     });
   }
+
 }

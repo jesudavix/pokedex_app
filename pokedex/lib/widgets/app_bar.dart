@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/blocs/bloc/search_bloc.dart';
 import 'package:pokedex/components/styles/styles_text.dart';
 import 'package:pokedex/widgets/icon_pokebola.dart';
+import 'package:pokedex/widgets/icon_search_pokemon.dart';
+import 'package:pokedex/widgets/input_pokemon.dart';
 
 class AppBarHome extends StatelessWidget {
-   final SearchState state;
+  final SearchState state;
 
   const AppBarHome({required this.state, super.key});
 
@@ -21,26 +22,11 @@ class AppBarHome extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             if (state is BarraBuscadorVisible)
-              Flexible(
-                child: TextField(
-                  style: const TextStyle(color: Colors.white),
-                  decoration: const InputDecoration(
-                    hintText: "Buscar Pokémon...",
-                    hintStyle: TextStyle(color: Colors.white),
-                    border: InputBorder.none,
-                  ),
-                  cursorColor: Colors.white,
-                ),
-              )
+              InputBuscarPokemon()
             else
               Text("Pokedex", style: AppTextStyle.appBarTitle()),
             const SizedBox(width: 8),
-            IconButton(
-              onPressed: () {
-                context.read<SearchBloc>().add(MostrarBarraBuscador());
-              },
-              icon: const Icon(Icons.search, color: Colors.white, size: 30),
-            ),
+            ButtonBuscarPokemon(state: state),
           ],
         ),
       ),
@@ -48,3 +34,6 @@ class AppBarHome extends StatelessWidget {
     );
   }
 }
+
+
+
