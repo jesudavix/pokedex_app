@@ -4,7 +4,7 @@ import 'package:pokedex/models/pokemon_model.dart';
 
 
 class PokemonRepository {
-  final String baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=20";
+  final String baseUrl = "https://pokeapi.co/api/v2/pokemon?limit=50";
 
   Future<List<PokemonData>> obtenerPokemonList() async {
     final response = await http.get(Uri.parse(baseUrl));

@@ -8,4 +8,12 @@ sealed class PokemonEvent extends Equatable {
 }
 
 class ObtenerListaPokemones extends PokemonEvent{}
-class ObtenerPokemonSearch extends PokemonEvent{}
+
+class BuscarPokemonPorNombre extends PokemonEvent {
+  final String nombre;
+
+  const BuscarPokemonPorNombre(this.nombre);
+
+  @override
+  List<Object> get props => [nombre];
+}

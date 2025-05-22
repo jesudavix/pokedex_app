@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/blocs/bloc_ui_pokemon/bloc/pokemon_bloc.dart';
 
 class InputBuscarPokemon extends StatelessWidget {
   const InputBuscarPokemon({
@@ -17,7 +19,12 @@ class InputBuscarPokemon extends StatelessWidget {
         ),
         cursorColor: Colors.white,
         onChanged: (value) {
-          
+          final bloc = context.read<PokemonBloc>();
+          if (value.isEmpty){
+            bloc.add(ObtenerListaPokemones());
+          } else{
+            bloc.add(BuscarPokemonPorNombre(value));
+          }
         },
       ),
     );

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex/blocs/bloc_search_pokemon/search_bloc.dart';
+import 'package:pokedex/blocs/bloc_search_icon_input/search_bloc.dart';
 import 'package:pokedex/components/styles/styles_text.dart';
 import 'package:pokedex/widgets/body_home_page.dart';
 import 'package:pokedex/widgets/icon_pokebola.dart';

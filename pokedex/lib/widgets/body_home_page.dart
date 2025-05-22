@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/blocs/bloc_ui_pokemon/bloc/pokemon_bloc.dart';
 import 'package:pokedex/components/styles/colors.dart';
+import 'package:pokedex/components/styles/styles_text.dart';
 import 'package:pokedex/repositories/api.dart';
 
 class BodyHomePage extends StatelessWidget {
@@ -16,65 +17,59 @@ class BodyHomePage extends StatelessWidget {
       child: BlocBuilder<PokemonBloc, PokemonState>(
         builder: (context, state) {
           if (state is PokemonCargando) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(color: Colors.red),
+            );
           } else if (state is PokemonCargado) {
             return GridView.builder(
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, // 2 tarjetas por fila
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 3 / 4,
+              padding: EdgeInsets.only(top: 10, bottom: 10, left: 6, right: 20),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 1.3,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 14,
               ),
               itemCount: state.pokemons.length,
               itemBuilder: (context, index) {
-                final pokemon = state.pokemons[index];
-                final color = AppColorStytle.getColor(pokemon.types.first);
-
+                final colorCard = AppColorStyle.getColor(
+                  state.pokemons[index].types.first,
+                );
                 return Card(
-                  color: color,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.network(
-                          pokemon.imageUrl,
-                          height: 80,
-                          fit: BoxFit.contain,
-                          errorBuilder: (_, __, ___) => const Icon(Icons.error),
-                        ),
-                        Text(
-                          pokemon.name[0].toUpperCase() +
-                              pokemon.name.substring(1),
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        Wrap(
-                          spacing: 6,
-                          children:
-                              pokemon.types
-                                  .map(
-                                    (type) => Chip(
-                                      label: Text(
-                                        type,
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      backgroundColor: Colors.black26,
-                                    ),
-                                  )
-                                  .toList(),
-                        ),
-                      ],
-                    ),
+                  color: colorCard,
+                  elevation: 4,
+                  child: Column(
+                    children: [
+                      Image.network(
+                        state.pokemons[index].imageUrl,
+                        height: 80,
+                        fit: BoxFit.cover,
+                      ),
+                      Text(
+                        state.pokemons[index].name.toUpperCase(),
+                        style: AppTextStyle.pokemonName(),
+                      ),
+                      Wrap(
+                        spacing: 6,
+                        runSpacing: 4,
+                        children: [
+                          ...state.pokemons[index].types.map((type) {
+                            final typeColor = AppColorStyle.getColorParaTipo(type);
+                            return Container(
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black, width: 1.5),
+                                borderRadius: BorderRadius.circular(15),
+                                color: typeColor,
+                              ),
+                              child: Text(
+                                type.toUpperCase(),
+                                style: AppTextStyle.pokemonType(),
+                              ),
+                            );
+                          }),
+                        ],
+                      ),
+                    ],
                   ),
                 );
               },
