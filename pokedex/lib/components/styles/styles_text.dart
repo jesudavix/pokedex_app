@@ -12,7 +12,7 @@ class AppTextStyle {
 
   static TextStyle pokemonName() {
     return TextStyle(
-      fontSize: 20,
+      fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Colors.white,
     );
